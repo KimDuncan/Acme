@@ -16,6 +16,8 @@ namespace Acme.DataLayer
     public DbSet<Models.Product> Products { get; set; }
     public DbSet<Models.Type> Types { get; set; }
     public DbSet<Models.Participant> Participants { get; set; }
+    public DbSet<Models.Draw> Draws { get; set; }
+
 
 
   }
