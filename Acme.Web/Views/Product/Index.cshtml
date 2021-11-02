@@ -17,6 +17,9 @@
           Description
         </td>
         <td>
+          Type
+        </td>
+        <td>
           Amount
         </td>
       </tr>
@@ -24,17 +27,20 @@
     <tbody>
       @foreach (var productOnStock in Model)
       {
-        <tr>
-          <td>
-            @productOnStock.Name
-          </td>
-          <td>
-            @productOnStock.Description
-          </td>
-          <td>
-            @productOnStock.Amount
-          </td>
-        </tr>
+      <tr>
+        <td>
+          @productOnStock.Name
+        </td>
+        <td>
+          @productOnStock.Description
+        </td>
+        <td>
+          @productOnStock.Type
+        </td>
+        <td>
+          @productOnStock.Amount
+        </td>
+      </tr>
       }
     </tbody>
   </table>

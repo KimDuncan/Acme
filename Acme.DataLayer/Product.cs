@@ -102,14 +102,14 @@ namespace Acme.DataLayer
                       Type = e.Name
                     }).ToList();
 
-      foreach (var product in products)
+      foreach (var product in products.Distinct())
       {
         Models.ProductOnStock productOnStock = new Models.ProductOnStock();
 
         productOnStock.Name  = product.Name;
         productOnStock.Description = product.Description;
-        productOnStock.Type = product.Description;
-
+        productOnStock.Type = product.Type;
+        productOnStock.Amount = products.Count(c => c.Name == product.Name);
 
         productOnStocks.Add(productOnStock);
       }
