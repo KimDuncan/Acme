@@ -16,5 +16,12 @@ namespace Acme.BusinessLayer
       return product.ProductsOnStock();
     }
 
+    public static List<Participant> Participants()
+    {
+
+      DataLayer.Participant participant = new DataLayer.Participant();
+      return participant.Participants();
+    }
+
   }
 }

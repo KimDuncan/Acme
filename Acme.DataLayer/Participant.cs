@@ -79,5 +79,16 @@ namespace Acme.DataLayer
       return Participants.Any();
     }
     #endregion
+
+    #region Participants
+    public List<Models.Participant> Participants()
+    {
+      var context = new AcmeContext();
+
+      context.Database.Connection.ConnectionString = _ConnectionString;
+      
+      return context.Participants.OrderBy(o=>o.Firstname).ToList();
+    }
+    #endregion
   }
 }

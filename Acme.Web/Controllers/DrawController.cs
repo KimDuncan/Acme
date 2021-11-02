@@ -10,12 +10,38 @@ namespace Acme.Web.Controllers
   {
     public IActionResult Index()
     {
-      return View();
+
+      return View(BusinessLayer.Get.Participants());
     }
 
     public IActionResult Details()
     {
       return View();
+    }
+
+    [HttpPost]
+    public IActionResult Details(Models.DrawViewModel model)
+    {
+
+      var exsist = BusinessLayer.Create.ValidateExistingParticipant(model.Email, model.DateOfBirth);
+      if (exsist)
+      {
+        ViewBag.Message = "Email already in use!";
+        return View();
+      }
+      else
+      {
+       var create =  BusinessLayer.Create.Participant(model.Firstname, model.Lastname, model.Email, model.DateOfBirth);
+
+        if (create)
+        {
+          return RedirectToAction("Index", "Draw");
+        }
+        else
+        {
+          return View();
+        }
+      }
     }
   }
 }
