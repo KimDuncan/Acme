@@ -42,5 +42,42 @@ namespace Acme.DataLayer
       return Participants.Any();
     }
     #endregion
+
+    #region RegisterForDraw
+    public bool RegisterForDraw(string email, DateTime DateOfBirth, string serialnumber)
+    {
+      var context = new AcmeContext();
+      context.Database.Connection.ConnectionString = _ConnectionString;
+
+      var validParticipant = ValidateExistingParticipant(email, DateOfBirth);
+      if (validParticipant)
+      {
+
+        var draw = new Models.Draw
+        {
+          Email = email,
+          SerialNumber = serialnumber
+        };
+
+        context.Draws.Add(draw);
+        int status = context.SaveChanges();
+
+        return status > 0 ? true : false;
+      }
+      return false;
+    }
+    #endregion
+
+    #region ValidateExistingParticipant
+    public bool ValidateExistingParticipant(string email, DateTime dateOfBirth)
+    {
+      var context = new AcmeContext();
+      context.Database.Connection.ConnectionString = _ConnectionString;
+
+      var Participants = context.Participants.Where(w => w.Email == email && w.DateOfBirth == dateOfBirth);
+
+      return Participants.Any();
+    }
+    #endregion
   }
 }

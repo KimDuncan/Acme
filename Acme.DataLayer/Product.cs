@@ -81,6 +81,42 @@ namespace Acme.DataLayer
       return productType.SerialPrefix;
     }
     #endregion
- 
+
+    #region ProductsOnStock
+    public List<Models.ProductOnStock> ProductsOnStock()
+    {
+      List<Models.ProductOnStock> productOnStocks = new List<Models.ProductOnStock>();
+
+      var context = new AcmeContext();
+
+      context.Database.Connection.ConnectionString = _ConnectionString;
+
+
+      var products = (from p in context.Products
+                      join e in context.Types
+                    on p.Type equals e.Id
+                    select new
+                    {
+                      Name = p.Name,
+                      Description = p.Description,
+                      Type = e.Name
+                    }).ToList();
+
+      foreach (var product in products)
+      {
+        Models.ProductOnStock productOnStock = new Models.ProductOnStock();
+
+        productOnStock.Name  = product.Name;
+        productOnStock.Description = product.Description;
+        productOnStock.Type = product.Description;
+
+
+        productOnStocks.Add(productOnStock);
+      }
+
+      return productOnStocks;
+    }
+    #endregion
+
   }
 }

@@ -1,0 +1,41 @@
+﻿@model List<Acme.DataLayer.Models.ProductOnStock>
+
+@{
+  ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+  <h1 class="display-4">Products</h1>
+
+  <table style="width:100%" id="products">
+    <thead>
+      <tr>
+        <td>
+          Name
+        </td>
+        <td>
+          Description
+        </td>
+        <td>
+          Amount
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var productOnStock in Model)
+      {
+        <tr>
+          <td>
+            @productOnStock.Name
+          </td>
+          <td>
+            @productOnStock.Description
+          </td>
+          <td>
+            @productOnStock.Amount
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
