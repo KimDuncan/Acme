@@ -1,54 +1,53 @@
-﻿@model List<Acme.DataLayer.Models.ProductOnStock>
-
+﻿@model List<Acme.DataLayer.Models.Participant>
 @{
   ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-  <h1 class="display-4">Products</h1>
+  <h1 class="display-4">registered Participant</h1>
 
-  <table style="width:100%" id="products">
+  <table style="width:100%" id="Participants">
     <thead>
       <tr>
         <td>
-          Name
+          Firstname
         </td>
         <td>
-          Description
+          Lastname
         </td>
         <td>
-          Type
+          Email
         </td>
         <td>
-          Amount
+          DateOfBirth
         </td>
       </tr>
     </thead>
     <tbody>
-      @foreach (var productOnStock in Model)
+      @foreach (var participant in Model)
       {
         <tr>
           <td>
-            @productOnStock.Name
+            @participant.Firstname
           </td>
           <td>
-            @productOnStock.Description
+            @participant.Lastname
           </td>
           <td>
-            @productOnStock.Type
+            @participant.Email
           </td>
           <td>
-            @productOnStock.Amount
+            @participant.DateOfBirth.ToString("dd-MM-yyyy")
           </td>
         </tr>
       }
     </tbody>
   </table>
-</div>
 
+</div>
 
 <script>
   $(document).ready(function () {
-    $('#products').DataTable();
+    $('#Participants').DataTable();
   });
 </script>

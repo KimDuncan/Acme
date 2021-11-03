@@ -1,4 +1,4 @@
-﻿@model List<Acme.DataLayer.Models.Participant>
+﻿@model List<Acme.DataLayer.Models.ParticipantDraw>
 @{
   ViewData["Title"] = "Home Page";
 }
@@ -6,7 +6,7 @@
 <div class="text-center">
   <h1 class="display-4">registered Participant</h1>
 
-  <table style="width:100%" id="products">
+  <table style="width:100%" id="ParticipantDraw">
     <thead>
       <tr>
         <td>
@@ -16,32 +16,44 @@
           Lastname
         </td>
         <td>
+          DateOfBirth
+        </td>
+        <td>
           Email
         </td>
         <td>
-          DateOfBirth
+          SerialNumber
         </td>
       </tr>
     </thead>
     <tbody>
       @foreach (var participant in Model)
       {
-        <tr>
-          <td>
-            @participant.Firstname
-          </td>
-          <td>
-            @participant.Lastname
-          </td>
-          <td>
-            @participant.Email
-          </td>
-          <td>
-            @participant.DateOfBirth.ToString("dd-MM-yyyy")
-          </td>
-        </tr>
+      <tr>
+        <td>
+          @participant.Firstname
+        </td>
+        <td>
+          @participant.Lastname
+        </td>
+        <td>
+          @participant.DateOfBirth
+        </td>
+        <td>
+          @participant.Email
+        </td>
+        <td>
+          @participant.SerialNumber
+        </td>
+      </tr>
       }
     </tbody>
   </table>
 
 </div>
+
+<script>
+  $(document).ready(function () {
+    $('#ParticipantDraw').DataTable();
+  });
+</script>

@@ -10,8 +10,7 @@ namespace Acme.Web.Controllers
   {
     public IActionResult Index()
     {
-
-      return View(BusinessLayer.Get.Participants());
+      return View(BusinessLayer.Get.ParticipantDraws());
     }
 
     public IActionResult Details()
@@ -35,7 +34,7 @@ namespace Acme.Web.Controllers
 
         if (create)
         {
-          return RedirectToAction("Index", "Draw");
+          return RedirectToAction("Index", "Participant");
         }
         else
         {

@@ -23,5 +23,11 @@ namespace Acme.BusinessLayer
       return participant.Participants();
     }
 
+    public static List<ParticipantDraw> ParticipantDraws()
+    {
+      DataLayer.Draw draw = new DataLayer.Draw();
+      return draw.ParticipantDraws();
+    }
+
   }
 }
