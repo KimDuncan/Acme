@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Acme.BusinessLayer\Acme.BusinessLayer.csproj" />
-    <ProjectReference Include="..\Acme.DataLayer\Acme.DataLayer.csproj" />
   </ItemGroup>
 
 </Project>

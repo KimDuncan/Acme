@@ -68,5 +68,16 @@ namespace Acme.DataLayer
     }
     #endregion
 
+    #region SerialNumberAlreadyRegistred
+    public bool SerialNumberAlreadyRegistred( string serialnumber)
+    {
+      var context = new AcmeContext();
+      context.Database.Connection.ConnectionString = _ConnectionString;
+
+      var draws = context.Draws.Where(w => w.SerialNumber == serialnumber).ToList();
+
+      return draws.Count() > 1 ? true : false;
+    }
+    #endregion
   }
 }

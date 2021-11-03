@@ -13,14 +13,28 @@ namespace Acme.Web.Controllers
       return View(BusinessLayer.Get.ParticipantDraws());
     }
 
-    public IActionResult Details()
+    public IActionResult Register()
     {
       return View();
     }
 
     [HttpPost]
-    public IActionResult Details(Models.DrawViewModel model)
+    public IActionResult Register(Models.DrawViewModel model)
     {
+      var years = ((DateTime.Now - model.DateOfBirth).Days / 365);
+      
+      if (years < 18)
+      {
+        ViewBag.Message = "You are to young to register!";
+        return View();
+      }
+
+      var valitserialnumber = BusinessLayer.Create.SerialNumberAlreadyRegistred(model.SerialNumber);
+      if (valitserialnumber)
+      {
+        ViewBag.Message = "Serialnumber already registred!";
+        return View();
+      }
 
       var exsist = BusinessLayer.Create.ValidateExistingParticipant(model.Email, model.DateOfBirth);
       if (exsist)
@@ -31,10 +45,45 @@ namespace Acme.Web.Controllers
       else
       {
        var create =  BusinessLayer.Create.Participant(model.Firstname, model.Lastname, model.Email, model.DateOfBirth);
+        var addSerialNumber = BusinessLayer.Create.Draw(model.Email, model.SerialNumber);
+        if (create && addSerialNumber)
+        {
+          return RedirectToAction("Index", "draw");
+        }
+        else
+        {
+          return View();
+        }
+      }
+    }
 
+    public IActionResult RegisterProduct()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public IActionResult RegisterProduct(Models.DrawViewModel model)
+    {
+      var serialNumberAlreadyRegistred = BusinessLayer.Create.SerialNumberAlreadyRegistred(model.SerialNumber);
+      if (serialNumberAlreadyRegistred)
+      {
+        ViewBag.Message = "Serialnumber already registred!";
+        return View();
+      }
+
+      var exsist = BusinessLayer.Create.ValidateExistingParticipant(model.Email, model.DateOfBirth);
+      if (!exsist)
+      {
+        ViewBag.Message = "Participant does not exist register first!";
+        return View();
+      }
+      else
+      {
+        var create = BusinessLayer.Create.Draw(model.Email,model.SerialNumber);
         if (create)
         {
-          return RedirectToAction("Index", "Participant");
+          return RedirectToAction("Index", "draw");
         }
         else
         {

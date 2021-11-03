@@ -4,7 +4,13 @@
 }
 
 <div class="text-center">
-  <h1 class="display-4">registered Participant</h1>
+  <h1 class="text-info pt-2 pb-3">participate in our draw this month</h1>
+  <p>
+    to win a lifetime of our classic <b>earthquake pills</b>
+  </p>
+  <br />
+      <p>Got more products register them to increase your changes! @Html.ActionLink("Register Product", "RegisterProduct", "Draw") </p>
+  <br />
 
   <table style="width:100%" id="ParticipantDraw">
     <thead>
@@ -16,7 +22,7 @@
           Lastname
         </td>
         <td>
-          DateOfBirth
+          Date Of Birth
         </td>
         <td>
           Email
@@ -29,23 +35,23 @@
     <tbody>
       @foreach (var participant in Model)
       {
-      <tr>
-        <td>
-          @participant.Firstname
-        </td>
-        <td>
-          @participant.Lastname
-        </td>
-        <td>
-          @participant.DateOfBirth
-        </td>
-        <td>
-          @participant.Email
-        </td>
-        <td>
-          @participant.SerialNumber
-        </td>
-      </tr>
+        <tr>
+          <td>
+            @participant.Firstname
+          </td>
+          <td>
+            @participant.Lastname
+          </td>
+          <td>
+            @participant.DateOfBirth.ToString("dd-MM-yyyy")
+          </td>
+          <td>
+            @participant.Email
+          </td>
+          <td>
+            @participant.SerialNumber
+          </td>
+        </tr>
       }
     </tbody>
   </table>

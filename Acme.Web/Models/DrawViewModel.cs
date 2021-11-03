@@ -23,13 +23,20 @@ namespace Acme.Web.Models
     [Display(Name = "Email")]
     public string Email { get; set; }
 
-    [Required]
+    [Display(Name = "Firstname")]
+    [Required(ErrorMessage = "Firstname is required.")]
     public string Firstname { get; set; }
-  
-    [Required]
+
+    [Display(Name = "Lastname")]
+    [Required(ErrorMessage = "Lastname is required.")]
     public string Lastname { get; set; }
-    
-    [Required]
+
+    [Required(ErrorMessage = "SerialNumber is required.")]
+    [RegularExpression("[a-zA-Z]{4}[0-9]{3}[a-zA-Z]{2}[0-9]{3}[a-zA-Z]{2}", ErrorMessage = "Not a valid SerialNumber.")]
+    public string SerialNumber { get; set; }
+
+    [Required(ErrorMessage = "Date of Birth is required.")]
+    [Display(Name = "Date of Birth")]
     [DataType(DataType.Date)]
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd-MM-yyyy}")]
     public DateTime DateOfBirth { get; set; }

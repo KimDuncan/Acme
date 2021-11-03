@@ -21,5 +21,19 @@ namespace Acme.BusinessLayer
 
       return participant.ValidateExistingParticipant(email, dateOfBirth);
     }
+
+    public static bool SerialNumberAlreadyRegistred(string serialNumber)
+    {
+      DataLayer.Draw draw = new DataLayer.Draw();
+
+      return draw.SerialNumberAlreadyRegistred(serialNumber);
+    }
+
+    public static bool Draw(string email, string serialNumber)
+    {
+      DataLayer.Draw draw = new DataLayer.Draw();
+
+      return draw.Create(email,serialNumber);
+    }
   }
 }
